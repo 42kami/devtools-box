@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import "./globals.css";
@@ -24,12 +23,11 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" className="dark">
       <head>
-        {/* Google AdSense - 替换 ca-pub-XXXXXXX 为你的发布商ID */}
-        <Script
+        {/* Google AdSense */}
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2590693054180835"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
       </head>
       <body className="min-h-screen flex flex-col antialiased">
