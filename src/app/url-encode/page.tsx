@@ -20,7 +20,7 @@ export default function UrlEncodePage() {
   // Encode URL
   const encodeUrl = useCallback(() => {
     if (!textInput.trim()) {
-      setError("请输入要编码的文本")
+      setError("Please enter text to encode")
       setEncodedOutput("")
       return
     }
@@ -32,7 +32,7 @@ export default function UrlEncodePage() {
       setEncodedOutput(encoded)
       setError("")
     } catch (e) {
-      setError(`编码错误: ${(e as Error).message}`)
+      setError(`Encoding error: ${(e as Error).message}`)
       setEncodedOutput("")
     }
   }, [textInput, encodeType])
@@ -40,7 +40,7 @@ export default function UrlEncodePage() {
   // Decode URL
   const decodeUrl = useCallback(() => {
     if (!encodedInput.trim()) {
-      setError("请输入要解码的 URL 编码字符串")
+      setError("Please enter URL encoded string to decode")
       setDecodedOutput("")
       return
     }
@@ -52,7 +52,7 @@ export default function UrlEncodePage() {
       setDecodedOutput(decoded)
       setError("")
     } catch (e) {
-      setError(`解码错误: 无效的 URL 编码字符串`)
+      setError(`Decoding error: Invalid URL encoded string`)
       setDecodedOutput("")
     }
   }, [encodedInput, encodeType])
@@ -69,7 +69,7 @@ export default function UrlEncodePage() {
           setTimeout(() => setCopiedDecode(false), 2000)
         }
       } catch {
-        setError("复制失败")
+        setError("Copy failed")
       }
     },
     []
@@ -83,7 +83,7 @@ export default function UrlEncodePage() {
     setError("")
   }, [])
 
-  const sampleText = "https://example.com/搜索?q=你好&lang=中文"
+  const sampleText = "https://example.com/search?q=hello world&lang=en"
 
   const loadSample = useCallback(() => {
     setTextInput(sampleText)
@@ -95,10 +95,10 @@ export default function UrlEncodePage() {
       <div className="space-y-2">
         <h1 className="text-3xl font-bold flex items-center gap-2">
           <Link className="h-8 w-8 text-pink-500" />
-          URL 编解码
+          URL Encoder/Decoder
         </h1>
         <p className="text-muted-foreground">
-          URL 编码（encodeURI / encodeURIComponent）与解码
+          URL encoding (encodeURI / encodeURIComponent) and decoding
         </p>
       </div>
 
@@ -106,7 +106,7 @@ export default function UrlEncodePage() {
 
       {/* Encode Type Selector */}
       <div className="flex items-center gap-4">
-        <span className="text-sm text-muted-foreground">编码类型:</span>
+        <span className="text-sm text-muted-foreground">Encoding Type:</span>
         <div className="flex gap-2">
           <Button
             variant={encodeType === "component" ? "default" : "outline"}
@@ -129,10 +129,10 @@ export default function UrlEncodePage() {
       </div>
 
       <div className="text-xs text-muted-foreground bg-muted/50 p-3 rounded-md">
-        <strong>区别说明：</strong>
+        <strong>Difference:</strong>
         <ul className="mt-1 space-y-1">
-          <li>• <code className="bg-muted px-1 rounded">encodeURIComponent</code>: 编码所有特殊字符，适用于编码 URL 参数值</li>
-          <li>• <code className="bg-muted px-1 rounded">encodeURI</code>: 保留 URL 结构字符（如 :/?#），适用于编码完整 URL</li>
+          <li>• <code className="bg-muted px-1 rounded">encodeURIComponent</code>: Encodes all special characters, use for URL parameter values</li>
+          <li>• <code className="bg-muted px-1 rounded">encodeURI</code>: Preserves URL structure characters (:/?#), use for complete URLs</li>
         </ul>
       </div>
 
@@ -147,21 +147,21 @@ export default function UrlEncodePage() {
         <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">文本 → URL 编码</CardTitle>
+              <CardTitle className="text-lg">Text → URL Encoded</CardTitle>
               <Button variant="ghost" size="sm" onClick={loadSample}>
-                示例
+                Sample
               </Button>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
             <Textarea
               className="min-h-[120px] code-editor resize-none"
-              placeholder="输入要编码的文本或 URL..."
+              placeholder="Enter text or URL to encode..."
               value={textInput}
               onChange={(e) => setTextInput(e.target.value)}
             />
             <div className="flex gap-2">
-              <Button onClick={encodeUrl}>编码</Button>
+              <Button onClick={encodeUrl}>Encode</Button>
             </div>
             {encodedOutput && (
               <div className="relative">
@@ -190,17 +190,17 @@ export default function UrlEncodePage() {
         {/* Decode Section */}
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg">URL 编码 → 文本</CardTitle>
+            <CardTitle className="text-lg">URL Encoded → Text</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <Textarea
               className="min-h-[120px] code-editor resize-none"
-              placeholder="输入 URL 编码字符串..."
+              placeholder="Enter URL encoded string..."
               value={encodedInput}
               onChange={(e) => setEncodedInput(e.target.value)}
             />
             <div className="flex gap-2">
-              <Button onClick={decodeUrl}>解码</Button>
+              <Button onClick={decodeUrl}>Decode</Button>
             </div>
             {decodedOutput && (
               <div className="relative">
@@ -231,11 +231,11 @@ export default function UrlEncodePage() {
 
       {/* SEO Content */}
       <section className="prose prose-invert max-w-none pt-8">
-        <h2 className="text-xl font-bold">URL 编解码工具说明</h2>
+        <h2 className="text-xl font-bold">About URL Encoder/Decoder</h2>
         <p className="text-muted-foreground">
-          这是一个免费的在线 URL 编解码工具，支持 encodeURI 和 encodeURIComponent 两种编码方式。
-          可以将中文、特殊字符转换为 URL 安全的编码格式，也可以将 URL 编码还原为原始文本。
-          所有处理在浏览器本地完成，数据安全有保障。
+          This is a free online URL encoding and decoding tool that supports both encodeURI and encodeURIComponent methods.
+          Convert special characters to URL-safe encoded format, or decode URL-encoded strings back to original text.
+          All processing is done locally in your browser - your data is secure.
         </p>
       </section>
     </div>

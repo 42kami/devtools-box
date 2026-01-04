@@ -112,7 +112,7 @@ export default function JsonDiffPage() {
 
   const compareJsons = useCallback(() => {
     if (!input1.trim() || !input2.trim()) {
-      setError("请输入两个 JSON 数据进行对比")
+      setError("Please enter two JSON objects to compare")
       setDiffResults([])
       return
     }
@@ -124,7 +124,7 @@ export default function JsonDiffPage() {
       setDiffResults(results)
       setError("")
     } catch (e) {
-      setError(`JSON 格式错误: ${(e as Error).message}`)
+      setError(`Invalid JSON: ${(e as Error).message}`)
       setDiffResults([])
     }
   }, [input1, input2])
@@ -137,16 +137,16 @@ export default function JsonDiffPage() {
   }, [])
 
   const sampleJson1 = `{
-  "name": "张三",
+  "name": "John",
   "age": 25,
-  "city": "北京",
+  "city": "New York",
   "hobbies": ["reading", "coding"]
 }`
 
   const sampleJson2 = `{
-  "name": "张三",
+  "name": "John",
   "age": 26,
-  "country": "中国",
+  "country": "USA",
   "hobbies": ["reading", "gaming"]
 }`
 
@@ -161,10 +161,10 @@ export default function JsonDiffPage() {
       <div className="space-y-2">
         <h1 className="text-3xl font-bold flex items-center gap-2">
           <GitCompare className="h-8 w-8 text-orange-500" />
-          JSON 对比工具
+          JSON Diff Tool
         </h1>
         <p className="text-muted-foreground">
-          对比两个 JSON 的差异，高亮显示新增、删除和修改的内容
+          Compare two JSON objects and highlight added, removed, and modified content
         </p>
       </div>
 
@@ -175,10 +175,10 @@ export default function JsonDiffPage() {
         <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">JSON 1（原始）</CardTitle>
+              <CardTitle className="text-lg">JSON 1 (Original)</CardTitle>
               <div className="flex items-center gap-2">
                 <Button variant="ghost" size="sm" onClick={loadSample}>
-                  示例
+                  Sample
                 </Button>
               </div>
             </div>
@@ -186,7 +186,7 @@ export default function JsonDiffPage() {
           <CardContent>
             <Textarea
               className="min-h-[300px] code-editor resize-none"
-              placeholder="输入原始 JSON..."
+              placeholder="Enter original JSON..."
               value={input1}
               onChange={(e) => setInput1(e.target.value)}
               spellCheck={false}
@@ -198,7 +198,7 @@ export default function JsonDiffPage() {
         <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">JSON 2（新版）</CardTitle>
+              <CardTitle className="text-lg">JSON 2 (New)</CardTitle>
               <Button variant="ghost" size="sm" onClick={clearAll}>
                 <Trash2 className="h-4 w-4" />
               </Button>
@@ -207,7 +207,7 @@ export default function JsonDiffPage() {
           <CardContent>
             <Textarea
               className="min-h-[300px] code-editor resize-none"
-              placeholder="输入新版 JSON..."
+              placeholder="Enter new JSON..."
               value={input2}
               onChange={(e) => setInput2(e.target.value)}
               spellCheck={false}
@@ -220,7 +220,7 @@ export default function JsonDiffPage() {
       <div className="flex justify-center">
         <Button onClick={compareJsons} size="lg" className="gap-2">
           <GitCompare className="h-5 w-5" />
-          开始对比
+          Compare
         </Button>
       </div>
 
@@ -234,7 +234,7 @@ export default function JsonDiffPage() {
       {diffResults.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle>对比结果</CardTitle>
+            <CardTitle>Comparison Results</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
@@ -259,30 +259,30 @@ export default function JsonDiffPage() {
                     }`}
                   >
                     {diff.type === "added"
-                      ? "+ 新增"
+                      ? "+ Added"
                       : diff.type === "removed"
-                      ? "- 删除"
-                      : "~ 修改"}
+                      ? "- Removed"
+                      : "~ Changed"}
                   </span>
                   <span className="text-muted-foreground ml-2">{diff.path}</span>
                   {diff.type === "changed" && (
                     <div className="mt-2 text-xs">
                       <div className="text-red-400">
-                        旧值: {formatValue(diff.oldValue)}
+                        Old: {formatValue(diff.oldValue)}
                       </div>
                       <div className="text-green-400">
-                        新值: {formatValue(diff.newValue)}
+                        New: {formatValue(diff.newValue)}
                       </div>
                     </div>
                   )}
                   {diff.type === "added" && (
                     <div className="mt-1 text-xs text-green-400">
-                      值: {formatValue(diff.newValue)}
+                      Value: {formatValue(diff.newValue)}
                     </div>
                   )}
                   {diff.type === "removed" && (
                     <div className="mt-1 text-xs text-red-400">
-                      值: {formatValue(diff.oldValue)}
+                      Value: {formatValue(diff.oldValue)}
                     </div>
                   )}
                 </div>
@@ -295,7 +295,7 @@ export default function JsonDiffPage() {
       {diffResults.length === 0 && !error && input1 && input2 && (
         <Card>
           <CardContent className="py-8 text-center text-muted-foreground">
-            点击"开始对比"按钮查看差异
+            Click "Compare" to see differences
           </CardContent>
         </Card>
       )}
@@ -304,11 +304,11 @@ export default function JsonDiffPage() {
 
       {/* SEO Content */}
       <section className="prose prose-invert max-w-none pt-8">
-        <h2 className="text-xl font-bold">JSON 对比工具说明</h2>
+        <h2 className="text-xl font-bold">About JSON Diff Tool</h2>
         <p className="text-muted-foreground">
-          这是一个免费的在线 JSON 对比工具，可以帮助您快速找出两个 JSON 数据之间的差异。
-          支持深层嵌套对象和数组的对比，清晰展示新增、删除和修改的字段。
-          所有处理在浏览器本地完成，您的数据完全安全。
+          This is a free online JSON comparison tool that helps you quickly find differences between two JSON objects.
+          Supports deep comparison of nested objects and arrays, clearly showing added, removed, and modified fields.
+          All processing is done locally in your browser - your data is completely secure.
         </p>
       </section>
     </div>

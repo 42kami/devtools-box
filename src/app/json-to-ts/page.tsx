@@ -63,7 +63,7 @@ export default function JsonToTsPage() {
 
   const convertToTs = useCallback(() => {
     if (!input.trim()) {
-      setError("请输入 JSON 数据")
+      setError("Please enter JSON data")
       setOutput("")
       return
     }
@@ -73,7 +73,7 @@ export default function JsonToTsPage() {
       setOutput(tsType)
       setError("")
     } catch (e) {
-      setError(`JSON 格式错误: ${(e as Error).message}`)
+      setError(`Invalid JSON: ${(e as Error).message}`)
       setOutput("")
     }
   }, [input, rootName])
@@ -85,7 +85,7 @@ export default function JsonToTsPage() {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
-      setError("复制失败")
+      setError("Copy failed")
     }
   }, [output])
 
@@ -100,20 +100,20 @@ export default function JsonToTsPage() {
       const text = await navigator.clipboard.readText()
       setInput(text)
     } catch {
-      setError("粘贴失败，请手动粘贴")
+      setError("Paste failed, please paste manually")
     }
   }, [])
 
   const sampleJson = `{
   "id": 1,
-  "name": "张三",
-  "email": "zhangsan@example.com",
+  "name": "John Doe",
+  "email": "john@example.com",
   "age": 25,
   "isActive": true,
   "tags": ["developer", "designer"],
   "address": {
-    "city": "北京",
-    "zipCode": "100000"
+    "city": "New York",
+    "zipCode": "10001"
   }
 }`
 
@@ -127,10 +127,10 @@ export default function JsonToTsPage() {
       <div className="space-y-2">
         <h1 className="text-3xl font-bold flex items-center gap-2">
           <FileCode className="h-8 w-8 text-green-500" />
-          JSON 转 TypeScript
+          JSON to TypeScript
         </h1>
         <p className="text-muted-foreground">
-          将 JSON 数据自动转换为 TypeScript 类型定义
+          Automatically convert JSON data to TypeScript type definitions
         </p>
       </div>
 
@@ -141,13 +141,13 @@ export default function JsonToTsPage() {
         <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">输入 JSON</CardTitle>
+              <CardTitle className="text-lg">Input JSON</CardTitle>
               <div className="flex items-center gap-2">
                 <Button variant="ghost" size="sm" onClick={loadSample}>
-                  示例
+                  Sample
                 </Button>
                 <Button variant="ghost" size="sm" onClick={handlePaste}>
-                  粘贴
+                  Paste
                 </Button>
                 <Button variant="ghost" size="sm" onClick={clearAll}>
                   <Trash2 className="h-4 w-4" />
@@ -158,7 +158,7 @@ export default function JsonToTsPage() {
           <CardContent>
             <Textarea
               className="min-h-[400px] code-editor resize-none"
-              placeholder='{"name": "张三", "age": 25}'
+              placeholder='{"name": "John", "age": 25}'
               value={input}
               onChange={(e) => setInput(e.target.value)}
               spellCheck={false}
@@ -170,7 +170,7 @@ export default function JsonToTsPage() {
         <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">TypeScript 类型</CardTitle>
+              <CardTitle className="text-lg">TypeScript Types</CardTitle>
               <Button
                 variant="ghost"
                 size="sm"
@@ -195,7 +195,7 @@ export default function JsonToTsPage() {
                 className="min-h-[400px] code-editor resize-none"
                 value={output}
                 readOnly
-                placeholder="TypeScript 类型定义将显示在这里..."
+                placeholder="TypeScript type definitions will appear here..."
               />
             )}
           </CardContent>
@@ -205,7 +205,7 @@ export default function JsonToTsPage() {
       {/* Action Buttons */}
       <div className="flex flex-wrap items-center justify-center gap-4">
         <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">根类型名称:</span>
+          <span className="text-sm text-muted-foreground">Root Type Name:</span>
           <input
             type="text"
             className="bg-muted px-3 py-1.5 rounded-md text-sm w-32"
@@ -216,7 +216,7 @@ export default function JsonToTsPage() {
         </div>
         <Button onClick={convertToTs} className="gap-2">
           <FileCode className="h-4 w-4" />
-          转换为 TypeScript
+          Convert to TypeScript
         </Button>
       </div>
 
@@ -224,11 +224,11 @@ export default function JsonToTsPage() {
 
       {/* SEO Content */}
       <section className="prose prose-invert max-w-none pt-8">
-        <h2 className="text-xl font-bold">JSON 转 TypeScript 工具说明</h2>
+        <h2 className="text-xl font-bold">About JSON to TypeScript Converter</h2>
         <p className="text-muted-foreground">
-          这是一个免费的在线 JSON 转 TypeScript 类型生成器。
-          只需粘贴您的 JSON 数据，即可自动生成对应的 TypeScript interface 或 type 定义。
-          支持嵌套对象、数组、可选属性等复杂结构。所有处理在本地完成，数据安全有保障。
+          This is a free online JSON to TypeScript type generator.
+          Simply paste your JSON data to automatically generate corresponding TypeScript interface or type definitions.
+          Supports nested objects, arrays, optional properties, and complex structures. All processing is done locally for data security.
         </p>
       </section>
     </div>

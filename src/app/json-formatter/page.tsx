@@ -16,7 +16,7 @@ export default function JsonFormatterPage() {
 
   const formatJson = useCallback(() => {
     if (!input.trim()) {
-      setError("请输入 JSON 数据")
+      setError("Please enter JSON data")
       setOutput("")
       return
     }
@@ -26,14 +26,14 @@ export default function JsonFormatterPage() {
       setOutput(formatted)
       setError("")
     } catch (e) {
-      setError(`JSON 格式错误: ${(e as Error).message}`)
+      setError(`Invalid JSON: ${(e as Error).message}`)
       setOutput("")
     }
   }, [input, indentSize])
 
   const minifyJson = useCallback(() => {
     if (!input.trim()) {
-      setError("请输入 JSON 数据")
+      setError("Please enter JSON data")
       setOutput("")
       return
     }
@@ -43,7 +43,7 @@ export default function JsonFormatterPage() {
       setOutput(minified)
       setError("")
     } catch (e) {
-      setError(`JSON 格式错误: ${(e as Error).message}`)
+      setError(`Invalid JSON: ${(e as Error).message}`)
       setOutput("")
     }
   }, [input])
@@ -55,7 +55,7 @@ export default function JsonFormatterPage() {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
-      setError("复制失败")
+      setError("Copy failed")
     }
   }, [output])
 
@@ -81,7 +81,7 @@ export default function JsonFormatterPage() {
       const text = await navigator.clipboard.readText()
       setInput(text)
     } catch {
-      setError("粘贴失败，请手动粘贴")
+      setError("Paste failed, please paste manually")
     }
   }, [])
 
@@ -90,10 +90,10 @@ export default function JsonFormatterPage() {
       <div className="space-y-2">
         <h1 className="text-3xl font-bold flex items-center gap-2">
           <Braces className="h-8 w-8 text-blue-500" />
-          JSON 格式化工具
+          JSON Formatter
         </h1>
         <p className="text-muted-foreground">
-          在线格式化、压缩、验证 JSON 数据，支持语法高亮显示
+          Format, minify, and validate JSON data online with syntax highlighting
         </p>
       </div>
 
@@ -104,10 +104,10 @@ export default function JsonFormatterPage() {
         <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">输入 JSON</CardTitle>
+              <CardTitle className="text-lg">Input JSON</CardTitle>
               <div className="flex items-center gap-2">
                 <Button variant="ghost" size="sm" onClick={handlePaste}>
-                  粘贴
+                  Paste
                 </Button>
                 <Button variant="ghost" size="sm" onClick={clearAll}>
                   <Trash2 className="h-4 w-4" />
@@ -118,7 +118,7 @@ export default function JsonFormatterPage() {
           <CardContent>
             <Textarea
               className="min-h-[400px] code-editor resize-none"
-              placeholder='{"name": "张三", "age": 25}'
+              placeholder='{"name": "John", "age": 25}'
               value={input}
               onChange={(e) => setInput(e.target.value)}
               spellCheck={false}
@@ -130,7 +130,7 @@ export default function JsonFormatterPage() {
         <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">输出结果</CardTitle>
+              <CardTitle className="text-lg">Output</CardTitle>
               <div className="flex items-center gap-2">
                 <Button
                   variant="ghost"
@@ -165,7 +165,7 @@ export default function JsonFormatterPage() {
                 className="min-h-[400px] code-editor resize-none"
                 value={output}
                 readOnly
-                placeholder="格式化后的 JSON 将显示在这里..."
+                placeholder="Formatted JSON will appear here..."
               />
             )}
           </CardContent>
@@ -175,24 +175,24 @@ export default function JsonFormatterPage() {
       {/* Action Buttons */}
       <div className="flex flex-wrap items-center justify-center gap-4">
         <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">缩进:</span>
+          <span className="text-sm text-muted-foreground">Indent:</span>
           <select
             className="bg-muted px-3 py-1.5 rounded-md text-sm"
             value={indentSize}
             onChange={(e) => setIndentSize(Number(e.target.value))}
           >
-            <option value={2}>2 空格</option>
-            <option value={4}>4 空格</option>
+            <option value={2}>2 Spaces</option>
+            <option value={4}>4 Spaces</option>
             <option value={1}>Tab</option>
           </select>
         </div>
         <Button onClick={formatJson} className="gap-2">
           <Braces className="h-4 w-4" />
-          格式化
+          Format
         </Button>
         <Button variant="secondary" onClick={minifyJson} className="gap-2">
           <Minimize2 className="h-4 w-4" />
-          压缩
+          Minify
         </Button>
       </div>
 
@@ -200,11 +200,11 @@ export default function JsonFormatterPage() {
 
       {/* SEO Content */}
       <section className="prose prose-invert max-w-none pt-8">
-        <h2 className="text-xl font-bold">JSON 格式化工具说明</h2>
+        <h2 className="text-xl font-bold">About JSON Formatter</h2>
         <p className="text-muted-foreground">
-          这是一个免费的在线 JSON 格式化工具，可以帮助您美化、压缩和验证 JSON 数据。
-          所有处理都在浏览器本地完成，您的数据不会被上传到服务器，完全安全。
-          支持自定义缩进大小，一键复制和下载格式化后的 JSON 文件。
+          This is a free online JSON formatter tool that helps you beautify, minify, and validate JSON data.
+          All processing is done locally in your browser - your data is never uploaded to any server.
+          Supports customizable indentation, one-click copy, and download of formatted JSON files.
         </p>
       </section>
     </div>

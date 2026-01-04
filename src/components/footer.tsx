@@ -7,16 +7,16 @@ export function Footer() {
         <div className="flex items-center space-x-2">
           <Braces className="h-5 w-5 text-muted-foreground" />
           <p className="text-sm text-muted-foreground">
-            © 2026 DevTools Box. 免费在线开发者工具集合
+            © 2026 DevTools Box. Free online developer tools.
           </p>
         </div>
         <div className="flex items-center space-x-4 text-sm text-muted-foreground">
           <a href="mailto:contact@example.com" className="hover:text-foreground transition-colors">
-            联系我们
+            Contact
           </a>
           <span>·</span>
           <a href="/privacy" className="hover:text-foreground transition-colors">
-            隐私政策
+            Privacy Policy
           </a>
         </div>
       </div>

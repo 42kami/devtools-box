@@ -16,11 +16,11 @@ import {
 import { useState } from "react"
 
 const tools = [
-  { name: "JSON 格式化", href: "/json-formatter", icon: Braces },
-  { name: "JSON 转 TS", href: "/json-to-ts", icon: FileCode },
-  { name: "JSON 对比", href: "/json-diff", icon: GitCompare },
+  { name: "JSON Formatter", href: "/json-formatter", icon: Braces },
+  { name: "JSON to TS", href: "/json-to-ts", icon: FileCode },
+  { name: "JSON Diff", href: "/json-diff", icon: GitCompare },
   { name: "Base64", href: "/base64", icon: Binary },
-  { name: "URL 编解码", href: "/url-encode", icon: LinkIcon },
+  { name: "URL Encode", href: "/url-encode", icon: LinkIcon },
 ]
 
 export function Navbar() {

@@ -23,7 +23,7 @@ export default function Base64Page() {
   // Text to Base64
   const encodeToBase64 = useCallback(() => {
     if (!textInput.trim()) {
-      setError("请输入要编码的文本")
+      setError("Please enter text to encode")
       setBase64Output("")
       return
     }
@@ -32,7 +32,7 @@ export default function Base64Page() {
       setBase64Output(encoded)
       setError("")
     } catch (e) {
-      setError(`编码错误: ${(e as Error).message}`)
+      setError(`Encoding error: ${(e as Error).message}`)
       setBase64Output("")
     }
   }, [textInput])
@@ -40,7 +40,7 @@ export default function Base64Page() {
   // Base64 to Text
   const decodeFromBase64 = useCallback(() => {
     if (!base64Input.trim()) {
-      setError("请输入要解码的 Base64 字符串")
+      setError("Please enter Base64 string to decode")
       setTextOutput("")
       return
     }
@@ -49,7 +49,7 @@ export default function Base64Page() {
       setTextOutput(decoded)
       setError("")
     } catch (e) {
-      setError(`解码错误: 无效的 Base64 字符串`)
+      setError(`Decoding error: Invalid Base64 string`)
       setTextOutput("")
     }
   }, [base64Input])
@@ -60,12 +60,12 @@ export default function Base64Page() {
     if (!file) return
 
     if (!file.type.startsWith("image/")) {
-      setError("请选择图片文件")
+      setError("Please select an image file")
       return
     }
 
     if (file.size > 5 * 1024 * 1024) {
-      setError("图片大小不能超过 5MB")
+      setError("Image size cannot exceed 5MB")
       return
     }
 
@@ -76,7 +76,7 @@ export default function Base64Page() {
       setError("")
     }
     reader.onerror = () => {
-      setError("读取文件失败")
+      setError("Failed to read file")
     }
     reader.readAsDataURL(file)
   }, [])
@@ -95,7 +95,7 @@ export default function Base64Page() {
         setTimeout(() => setCopiedImage(false), 2000)
       }
     } catch {
-      setError("复制失败")
+      setError("Copy failed")
     }
   }, [])
 
@@ -113,10 +113,10 @@ export default function Base64Page() {
       <div className="space-y-2">
         <h1 className="text-3xl font-bold flex items-center gap-2">
           <Binary className="h-8 w-8 text-purple-500" />
-          Base64 编解码
+          Base64 Encoder/Decoder
         </h1>
         <p className="text-muted-foreground">
-          文本与 Base64 互转，支持图片转 Base64
+          Convert text and images to/from Base64
         </p>
       </div>
 
@@ -128,14 +128,14 @@ export default function Base64Page() {
           variant={activeTab === "text" ? "default" : "outline"}
           onClick={() => setActiveTab("text")}
         >
-          文本编解码
+          Text Encode/Decode
         </Button>
         <Button
           variant={activeTab === "image" ? "default" : "outline"}
           onClick={() => setActiveTab("image")}
         >
           <Image className="h-4 w-4 mr-2" />
-          图片转 Base64
+          Image to Base64
         </Button>
         <Button variant="ghost" size="sm" onClick={clearAll} className="ml-auto">
           <Trash2 className="h-4 w-4" />
@@ -153,17 +153,17 @@ export default function Base64Page() {
           {/* Encode Section */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg">文本 → Base64（编码）</CardTitle>
+              <CardTitle className="text-lg">Text → Base64 (Encode)</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <Textarea
                 className="min-h-[120px] code-editor resize-none"
-                placeholder="输入要编码的文本..."
+                placeholder="Enter text to encode..."
                 value={textInput}
                 onChange={(e) => setTextInput(e.target.value)}
               />
               <div className="flex gap-2">
-                <Button onClick={encodeToBase64}>编码为 Base64</Button>
+                <Button onClick={encodeToBase64}>Encode to Base64</Button>
               </div>
               {base64Output && (
                 <div className="relative">
@@ -192,17 +192,17 @@ export default function Base64Page() {
           {/* Decode Section */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg">Base64 → 文本（解码）</CardTitle>
+              <CardTitle className="text-lg">Base64 → Text (Decode)</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <Textarea
                 className="min-h-[120px] code-editor resize-none"
-                placeholder="输入 Base64 字符串..."
+                placeholder="Enter Base64 string..."
                 value={base64Input}
                 onChange={(e) => setBase64Input(e.target.value)}
               />
               <div className="flex gap-2">
-                <Button onClick={decodeFromBase64}>解码为文本</Button>
+                <Button onClick={decodeFromBase64}>Decode to Text</Button>
               </div>
               {textOutput && (
                 <div className="relative">
@@ -231,7 +231,7 @@ export default function Base64Page() {
       ) : (
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg">图片 → Base64</CardTitle>
+            <CardTitle className="text-lg">Image → Base64</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div
@@ -239,8 +239,8 @@ export default function Base64Page() {
               onClick={() => fileInputRef.current?.click()}
             >
               <Upload className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-              <p className="text-muted-foreground">点击或拖拽图片到此处</p>
-              <p className="text-xs text-muted-foreground mt-2">支持 JPG, PNG, GIF, WebP（最大 5MB）</p>
+              <p className="text-muted-foreground">Click or drag image here</p>
+              <p className="text-xs text-muted-foreground mt-2">Supports JPG, PNG, GIF, WebP (max 5MB)</p>
               <input
                 ref={fileInputRef}
                 type="file"
@@ -279,7 +279,7 @@ export default function Base64Page() {
                   </Button>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  大小: {(imageBase64.length / 1024).toFixed(2)} KB
+                  Size: {(imageBase64.length / 1024).toFixed(2)} KB
                 </p>
               </>
             )}
@@ -291,11 +291,11 @@ export default function Base64Page() {
 
       {/* SEO Content */}
       <section className="prose prose-invert max-w-none pt-8">
-        <h2 className="text-xl font-bold">Base64 编解码工具说明</h2>
+        <h2 className="text-xl font-bold">About Base64 Encoder/Decoder</h2>
         <p className="text-muted-foreground">
-          这是一个免费的在线 Base64 编解码工具，支持文本与 Base64 字符串的互相转换，
-          以及图片转 Base64 Data URL。所有处理在浏览器本地完成，您的数据不会被上传，完全安全。
-          常用于 API 数据传输、内嵌图片等场景。
+          This is a free online Base64 encoding and decoding tool that supports converting text to/from Base64 strings
+          and images to Base64 Data URLs. All processing is done locally in your browser - your data is never uploaded.
+          Commonly used for API data transmission and embedding images.
         </p>
       </section>
     </div>
