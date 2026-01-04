@@ -49,7 +49,7 @@ export function AdBanner({ slot = "horizontal", adSlot }: AdBannerProps) {
           width: sizeConfig[slot].width,
           height: sizeConfig[slot].height,
         }}
-        data-ad-client="ca-pub-XXXXXXX"  // 替换为你的发布商ID
+        data-ad-client="ca-pub-2590693054180835"
         data-ad-slot={adSlot}
         data-ad-format={slot === "horizontal" ? "horizontal" : "auto"}
         data-full-width-responsive="true"

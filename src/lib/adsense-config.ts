@@ -3,7 +3,7 @@
 
 export const ADSENSE_CONFIG = {
   // 发布商 ID (在 AdSense 首页可以找到，格式: ca-pub-1234567890)
-  publisherId: "ca-pub-XXXXXXX",
+  publisherId: "ca-pub-2590693054180835",
   
   // 广告单元 ID (每个广告位一个，在 AdSense 后台创建广告单元后获取)
   slots: {
