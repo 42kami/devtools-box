@@ -1,9 +1,12 @@
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "JSON 对比工具 - DevTools Box",
-  description: "免费在线 JSON 对比工具，快速找出两个 JSON 数据的差异，支持深层嵌套对比。",
-  keywords: ["JSON对比", "JSON差异", "JSON比较", "在线JSON工具"],
+  title: "JSON Diff & Compare Tool",
+  description: "Free online JSON diff tool. Compare two JSON objects and highlight differences. Supports deep nested comparison. No data uploaded.",
+  keywords: ["JSON diff", "JSON compare", "JSON difference", "compare JSON online", "JSON对比"],
+  alternates: {
+    canonical: "/json-diff",
+  },
 }
 
 export default function JsonDiffLayout({
